@@ -35,8 +35,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">By: <?php echo $red['ime'] . " " . $red['prezime']; ?></h6>
                     <p class="card-text"><?php echo $red['opis'] ?></p>
                     <h5 class="card-subtitle mb-2">Price: <?php echo $red['cena'] ?> EUR</h5>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="delete.php?id=<?php echo $red['id'] ?>"> <button type="button" class="btn btn-danger" name="button_del">Delete</button></a>
                 </div>
             </div>
         <?php endwhile; ?>
