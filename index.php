@@ -11,6 +11,10 @@
 
 <body>
 
+    <a href="dodaj.php"><button class="btn btn-danger" style="width:300px; height:50px; border-radius:25px;
+    margin-top:50px; margin-left: 850px;">Novi kurs</button></a>
+
+
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 5px;">
 
         <?php
@@ -20,12 +24,12 @@
         $username = "root";
         $password = "";
         $db = "kursevi";
-        $connection = new mysqli($hostname, $username, $password, $db) or die("Connect failed: %s\n" . $conn->error);
+        $connection = new mysqli($hostname, $username, $password, $db) or die("Connect failed: %s\n" . $connection->error);
         $data = $connection->query($query);
         while ($red = mysqli_fetch_array($data)) :
         ?>
 
-            <div class="card border-primary text-center" style="margin-right:20px; margin-left:180px; width: 450px;">
+            <div class="card border-primary text-center" style="margin-right:20px; margin-left:150px; width: 450px;">
                 <div class="card-body">
                     <h3 class="card-title"><?php echo $red['naziv']; ?></h3>
                     <h6 class="card-subtitle mb-2 text-muted">By: <?php echo $red['ime'] . " " . $red['prezime']; ?></h6>
