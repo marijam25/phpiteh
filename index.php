@@ -29,12 +29,13 @@
         while ($red = mysqli_fetch_array($data)) :
         ?>
 
-            <div class="card border-primary text-center" style="margin-right:20px; margin-left:150px; width: 450px;">
+            <div class="card border-primary text-center" style="margin-right:20px; margin-left:150px; width: 380px;">
                 <div class="card-body">
                     <h3 class="card-title"><?php echo $red['naziv']; ?></h3>
                     <h6 class="card-subtitle mb-2 text-muted">By: <?php echo $red['ime'] . " " . $red['prezime']; ?></h6>
                     <p class="card-text"><?php echo $red['opis'] ?></p>
                     <h5 class="card-subtitle mb-2">Price: <?php echo $red['cena'] ?> EUR</h5>
+                    <a href="edit.php?id=<?php echo $red['id'] ?>"> <button type="button" class="btn btn-primary" name="button_edit">Edit</button></a>
                     <a href="delete.php?id=<?php echo $red['id'] ?>"> <button type="button" class="btn btn-danger" name="button_del">Delete</button></a>
                 </div>
             </div>

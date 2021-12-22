@@ -6,22 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Add</title>
+    <title>Edit</title>
 </head>
 
 <body>
+
+    <?php
+    require 'Kurs.php';
+    $query = "select * from kurs where id=" . $_GET['id'];
+    $hostname = "localhost";
+    $username = "root";
+    $password = "";
+    $db = "kursevi";
+    $connection = new mysqli($hostname, $username, $password, $db) or die("Connect failed: %s\n" . $connection->error);
+
+    $data = $connection->query($query);
+    $data_obj = mysqli_fetch_array($data);
+    ?>
+
     <form method="post" class="text-center" style="width: 500px; margin-left:650px; margin-top:50px;">
         <div class="mb-3">
             <label for="naziv" class="form-label">Naziv</label>
-            <input type="text" class="form-control" name="naziv" id="naziv">
+            <input type="text" class="form-control" name="naziv" id="naziv" value="<?php echo $data_obj['naziv']; ?>">
         </div>
         <div class="mb-3">
             <label for="opis" class="form-label">Opis</label>
-            <input type="text" class="form-control" name="opis" id="opis">
+            <input type="text" class="form-control" name="opis" id="opis" value="<?php echo $data_obj['opis']; ?>">
         </div>
         <div class="mb-3">
             <label for="cena" class="form-label">Cena</label>
-            <input type="number" class="form-control" name="cena" id="cena">
+            <input type="number" class="form-control" name="cena" id="cena" value="<?php echo $data_obj['cena']; ?>">
         </div>
         <div class="form-group mb-3">
             <label for="autor" class="form-label">Autor</label>
@@ -41,21 +55,20 @@
                 <?php endwhile; ?>
             </select>
         </div>
-        <button type="submit" name="sacuvaj" class="btn btn-primary">Sacuvaj</button>
+        <button type="submit" name="izmeni" class="btn btn-primary">Sacuvaj izmene</button>
     </form>
 
     <?php
-    require 'Kurs.php';
-
-    if (isset($_POST['sacuvaj'])) {
+    if (isset($_POST['izmeni'])) {
 
         $kurs = new Kurs();
-        if ($kurs->dodajKurs($_POST['naziv'], $_POST['opis'], $_POST['cena'], $_POST['autor'])) {
-            echo "<script type='text/javascript'>alert('Kurs sacuvan u bazi!'); location='index.php'</script>";
+        if ($kurs->azurirajKurs($_GET['id'], $_POST['naziv'], $_POST['opis'], $_POST['cena'], $_POST['autor'])) {
+            echo "<script type='text/javascript'>alert('Kurs uspešno izmenjen!'); location='index.php'</script>";
         } else {
-            echo "<script type='text/javascript'>alert('Kurs nije sacuvan!');";
+            echo "<script type='text/javascript'>alert('Kurs nije izmenjen!');'</script>";
         }
     }
+
     ?>
 
 

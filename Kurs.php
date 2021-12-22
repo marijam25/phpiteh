@@ -22,4 +22,20 @@ class Kurs
             return false;
         }
     }
+
+    public function azurirajKurs($id, $naziv, $opis, $cena, $autor_id)
+    {
+        $connection = new mysqli("localhost", "root", "", "kursevi") or die("Connect failed: %s\n" . $connection->error);
+        $query = "update kurs set naziv='" . $naziv . "', opis='" . $opis . "',
+        cena='" . $cena . "', autor_id='" . $autor_id . "' where id=" . $id;
+
+
+        if ($connection->query($query)) {
+            $connection->close();
+            return true;
+        } else {
+            $connection->close();
+            return false;
+        }
+    }
 }
