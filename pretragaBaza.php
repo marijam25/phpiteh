@@ -11,30 +11,23 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div style="margin-left: 850px;">
-            <a class="navbar-brand" href="index.php">Kursevi</a>
-            <a class="navbar-brand" href="pretraga.php">Pretraga</a>
-            <a class="navbar-brand" href="sortiranje.php">Sortiranje</a>
-        </div>
-    </nav>
-
-
-    <a href="dodaj.php"><button class="btn btn-danger" style="width:300px; height:50px; border-radius:25px;
-    margin-top:50px; margin-left: 850px;">Novi kurs</button></a>
-
 
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 5px;">
 
         <?php
 
-        $query = "select kurs.id, kurs.naziv, kurs.opis, kurs.cena, autor.ime, autor.prezime from kurs kurs join autor autor on kurs.autor_id=autor.id";
+        $kriterijum = $_POST['kriterijumPretrage'];
+
+
+        $query = "select kurs.id, kurs.naziv, kurs.opis, kurs.cena, autor.ime, autor.prezime from kurs kurs join autor autor on kurs.autor_id=autor.id 
+        where kurs.id like '%" . $kriterijum . "%' or kurs.naziv like '%" . $kriterijum . "%' or kurs.opis like '%" . $kriterijum . "%' or kurs.cena like '%" . $kriterijum . "%' or autor.ime like '%" . $kriterijum . "%' or autor.prezime like '%" . $kriterijum . "%'";
         $hostname = "localhost";
         $username = "root";
         $password = "";
         $db = "kursevi";
         $connection = new mysqli($hostname, $username, $password, $db) or die("Connect failed: %s\n" . $connection->error);
         $data = $connection->query($query);
+
         while ($red = mysqli_fetch_array($data)) :
         ?>
 
